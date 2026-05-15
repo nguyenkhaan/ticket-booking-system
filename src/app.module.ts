@@ -7,6 +7,7 @@ import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { TransformInterceptor } from './bases/interceptors/transform.interceptor';
 import { LoggingInterceptor } from './bases/interceptors/logging.interceptor';
 import { HttpExceptionFilter } from './bases/filters/http-exception.filter';
+import { HealthModule } from './modules/health/health.module';
 //Add  e module here
 @Module({
     imports: [
@@ -14,6 +15,7 @@ import { HttpExceptionFilter } from './bases/filters/http-exception.filter';
         ConfigModule.forRoot({
             isGlobal: true,
         }),
+        HealthModule, 
 
     ],
     controllers: [AppController],
