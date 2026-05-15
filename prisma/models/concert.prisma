@@ -1,0 +1,21 @@
+model Concert {
+  id            String    @id @default(cuid())
+  title         String
+  description   String?
+  venue         String
+  startTime     DateTime
+  endTime       DateTime
+  status        ConcertStatus @default(DRAFT)
+  createdById   String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  createdBy     User      @relation(fields: [createdById], references: [id], onDelete: Restrict)
+  ticketCategories TicketCategory[]
+  bookings      Booking[]
+
+  @@map("concerts")
+  @@index([status])
+  @@index([createdById])
+}

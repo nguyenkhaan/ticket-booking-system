@@ -1,0 +1,25 @@
+model Voucher {
+  id                  String    @id @default(cuid())
+  code                String    @unique
+  type                VoucherType
+  value               Decimal   @db.Decimal(10, 2)
+  maxDiscountAmount   Decimal?  @db.Decimal(10, 2)
+  minOrderAmount      Decimal?  @db.Decimal(10, 2)
+  usageLimitTotal     Int?
+  usageLimitPerUser   Int       @default(1)
+  usedCount           Int       @default(0)
+  validFrom           DateTime
+  validTo             DateTime
+  status              VoucherStatus @default(ACTIVE)
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+
+  // Relations
+  bookings            Booking[]
+  redemptions         VoucherRedemption[]
+
+  @@map("vouchers")
+  @@index([code])
+  @@index([status])
+  @@index([validFrom, validTo])
+}

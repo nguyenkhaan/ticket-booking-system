@@ -1,0 +1,21 @@
+model TicketCategory {
+  id                String    @id @default(cuid())
+  concertId         String
+  name              String
+  price             Decimal   @db.Decimal(10, 2)
+  currency          String    @default("USD")
+  totalQuantity     Int
+  reservedQuantity  Int       @default(0)
+  soldQuantity      Int       @default(0)
+  maxPerOrder       Int       @default(10)
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  // Relations
+  concert           Concert   @relation(fields: [concertId], references: [id], onDelete: Cascade)
+  bookingItems      BookingItem[]
+
+  @@map("ticket_categories")
+  @@index([concertId])
+  @@unique([concertId, name])
+}

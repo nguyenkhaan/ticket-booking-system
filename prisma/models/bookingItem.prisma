@@ -1,0 +1,17 @@
+
+model BookingItem {
+  id                String    @id @default(cuid())
+  bookingId         String
+  ticketCategoryId  String
+  unitPrice         Decimal   @db.Decimal(10, 2)
+  quantity          Int
+  lineTotal         Decimal   @db.Decimal(10, 2)
+
+  // Relations
+  booking           Booking   @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  ticketCategory    TicketCategory @relation(fields: [ticketCategoryId], references: [id], onDelete: Restrict)
+
+  @@map("booking_items")
+  @@index([bookingId])
+  @@index([ticketCategoryId])
+}

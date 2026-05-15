@@ -1,0 +1,19 @@
+model AuditLog {
+  id                BigInt    @id @default(autoincrement())
+  actorUserId       String?
+  action            String
+  resourceType      String
+  resourceId        String
+  beforeData        Json?
+  afterData         Json?
+  ipAddress         String?
+  createdAt         DateTime  @default(now())
+
+  // Relations
+  actorUser         User?     @relation(fields: [actorUserId], references: [id], onDelete: SetNull)
+
+  @@map("audit_logs")
+  @@index([actorUserId])
+  @@index([resourceType, resourceId])
+  @@index([createdAt])
+}

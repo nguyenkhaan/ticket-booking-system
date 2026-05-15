@@ -1,0 +1,18 @@
+model VoucherRedemption {
+  id             String   @id @default(cuid())
+  voucherId      String
+  bookingId      String   @unique
+  userId         String
+  discountAmount Decimal  @db.Decimal(10, 2)
+  createdAt      DateTime @default(now())
+
+
+  voucher Voucher @relation(fields: [voucherId], references: [id], onDelete: Cascade)
+  booking Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([voucherId, bookingId])
+  @@index([userId])
+  @@index([voucherId])
+  @@map("voucher_redemptions")
+}
