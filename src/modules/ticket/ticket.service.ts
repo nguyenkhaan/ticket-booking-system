@@ -1,6 +1,9 @@
 import { PrismaService } from '@/prisma/prisma.service';
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { CreateTicketCategoryDto, UpdateTicketCategoryDto } from './dto/ticket.dto';
+import {
+    CreateTicketCategoryDto,
+    UpdateTicketCategoryDto,
+} from './dto/ticket.dto';
 
 @Injectable()
 export class TicketService {
