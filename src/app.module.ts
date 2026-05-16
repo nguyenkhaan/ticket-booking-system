@@ -17,6 +17,7 @@ import { TicketModule } from './modules/ticket/ticket.module';
 import { ConcertModule } from './modules/concert/concert.module';
 import { PaymentsModule } from './modules/payments/payment.module';
 import { VouchersModule } from './modules/voucher/voucher.module';
+import { AuditLogModule } from './modules/audit-log/audit.module';
 //Add  e module here
 @Module({
     imports: [
@@ -31,7 +32,8 @@ import { VouchersModule } from './modules/voucher/voucher.module';
         TicketModule,
         ConcertModule, 
         PaymentsModule, 
-        VouchersModule
+        VouchersModule, 
+        AuditLogModule
     ],
     controllers: [AppController],
     providers: [
