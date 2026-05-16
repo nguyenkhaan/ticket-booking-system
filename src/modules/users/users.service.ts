@@ -9,10 +9,10 @@ export class UsersService {
     async create(createUserDto: CreateUserDto) {
         const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
         const data = {
-            fullName : createUserDto.fullName || null, 
-            passwordHash : hashedPassword, 
-            email : createUserDto.email
-        }
+            fullName: createUserDto.fullName || null,
+            passwordHash: hashedPassword,
+            email: createUserDto.email,
+        };
         const user = await this.prismaService.user.create({
             data: {
                 ...data,
@@ -81,8 +81,7 @@ export class UsersService {
             },
         });
     }
-    async remove(id: string) 
-    {
+    async remove(id: string) {
         return this.prismaService.user.delete({
             where: { id },
             select: {

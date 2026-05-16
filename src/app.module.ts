@@ -12,6 +12,7 @@ import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { AtGuard } from './bases/guards/at.guard';
 import { RolesGuard } from './bases/guards/roles.guard';
+import { BookingsModule } from './modules/bookings/bookings.module';
 //Add  e module here
 @Module({
     imports: [
@@ -20,8 +21,9 @@ import { RolesGuard } from './bases/guards/roles.guard';
             isGlobal: true,
         }),
         HealthModule,
-        UsersModule, 
-        AuthModule
+        UsersModule,
+        AuthModule,
+        BookingsModule
     ],
     controllers: [AppController],
     providers: [
@@ -31,13 +33,13 @@ import { RolesGuard } from './bases/guards/roles.guard';
             useClass: HttpExceptionFilter,
         },
         {
-            provide: APP_GUARD, 
-            useClass: AtGuard
-        }, 
+            provide: APP_GUARD,
+            useClass: AtGuard,
+        },
         {
-            provide : APP_GUARD, 
-            useClass : RolesGuard
-        }, 
+            provide: APP_GUARD,
+            useClass: RolesGuard,
+        },
         {
             provide: APP_INTERCEPTOR,
             useClass: LoggingInterceptor,

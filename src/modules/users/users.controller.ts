@@ -27,7 +27,7 @@ export class UsersController {
         return await this.userService.create(createUserDto);
     }
     @Get()
-    @ApiBearerAuth()
+    @ApiBearerAuth('access-token')
     @ApiOperation({
         summary: 'Find all users in system',
     })
@@ -35,29 +35,29 @@ export class UsersController {
         return await this.userService.findAll();
     }
     @Get('/:id')
-    @ApiBearerAuth()
+    @ApiBearerAuth('access-token')
     @ApiOperation({
         summary: 'Get user by id',
-    }) 
+    })
     async findById(@Param('id') id: string) {
-        return await this.userService.findOne(id) 
+        return await this.userService.findOne(id);
     }
     @Patch('/:id')
-    @ApiBearerAuth()
+    @ApiBearerAuth('access-token')
     @ApiOperation({ summary: 'Update user information' })
     async update(
         @Param('id') id: string,
         @Body() updateUserDto: UpdateUserDto,
     ) {
-        return await this.userService.update(id , updateUserDto) 
+        return await this.userService.update(id, updateUserDto);
     }
     @Delete('/:id')
     @Roles(UserRole.ADMIN)
-    @ApiBearerAuth()
+    @ApiBearerAuth('access-token')
     @ApiOperation({
         summary: 'Delete user (Admin only)',
     })
     async remove(@Param('id') id: string) {
-        return await this.userService.remove(id) 
+        return await this.userService.remove(id);
     }
 }
