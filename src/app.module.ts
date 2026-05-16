@@ -13,6 +13,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { AtGuard } from './bases/guards/at.guard';
 import { RolesGuard } from './bases/guards/roles.guard';
 import { BookingsModule } from './modules/bookings/bookings.module';
+import { TicketModule } from './modules/ticket/ticket.module';
 //Add  e module here
 @Module({
     imports: [
@@ -23,7 +24,8 @@ import { BookingsModule } from './modules/bookings/bookings.module';
         HealthModule,
         UsersModule,
         AuthModule,
-        BookingsModule
+        BookingsModule,
+        TicketModule
     ],
     controllers: [AppController],
     providers: [

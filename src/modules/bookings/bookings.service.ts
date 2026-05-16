@@ -188,7 +188,7 @@ export class BookingService {
     }
 
     async findByBookingCode(bookingCode: string) {
-        return this.prismaService.booking.findUnique({
+        return await this.prismaService.booking.findUnique({
             where: { bookingCode },
             include: {
                 bookingItems: true,
@@ -199,7 +199,7 @@ export class BookingService {
     }
 
     async findUserBookings(userId: string) {
-        return this.prismaService.booking.findMany({
+        return await this.prismaService.booking.findMany({
             where: { userId },
             include: {
                 bookingItems: true,
@@ -218,12 +218,13 @@ export class BookingService {
             throw new BadRequestException('Booking not found');
         }
 
-        // Release reserved tickets
+        // Tim kiem cac booking item lien quan
         const bookingItems = await this.prismaService.bookingItem.findMany({
             where: { bookingId: id },
         });
 
         try {
+            // Hoi phuc lai so so luong ticket da dat cho truoc (reservedQuantity)
             await this.prismaService.$transaction(async (tx) => {
                 for (const item of bookingItems) {
                     await tx.ticketCategory.update({
@@ -235,7 +236,7 @@ export class BookingService {
                         },
                     });
                 }
-
+                //Chuyen trang thai sang CANCELLED ====> Tuong duong voi viec chuyen trang thai uh uh
                 await tx.booking.update({
                     where: { id },
                     data: { status: 'CANCELLED' },
@@ -245,7 +246,7 @@ export class BookingService {
             throw new BadRequestException('Failed to cancel booking');
         }
 
-        return this.findOne(id);
+        return await this.findOne(id);
     }
 
     async confirmBooking(id: string) {
@@ -287,6 +288,6 @@ export class BookingService {
             throw new BadRequestException('Failed to confirm booking');
         }
 
-        return this.findOne(id);
+        return await this.findOne(id);
     }
 }
