@@ -5,19 +5,19 @@ import { ApiTags, ApiOperation } from '@nestjs/swagger';
 @ApiTags('Health')
 @Controller('health')
 export class HealthController {
-  constructor(private readonly healthService: HealthService) {}
+    constructor(private readonly healthService: HealthService) {}
 
-  @Public()
-  @Get('liveness')
-  @ApiOperation({ summary: 'Server status right now' })
-  liveness() {
-    return this.healthService.liveness();
-  }
+    @Public()
+    @Get('liveness')
+    @ApiOperation({ summary: 'Server status right now' })
+    liveness() {
+        return this.healthService.liveness();
+    }
 
-  @Public()
-  @Get('readiness')
-  @ApiOperation({ summary: 'Checking database connection of server' })
-  readiness() {
-    return this.healthService.readiness();
-  }
+    @Public()
+    @Get('readiness')
+    @ApiOperation({ summary: 'Checking database connection of server' })
+    readiness() {
+        return this.healthService.readiness();
+    }
 }

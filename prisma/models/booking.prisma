@@ -14,6 +14,7 @@ model Booking {
     updatedAt      DateTime      @updatedAt
     // Relations
     user              User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+    //Dat cai cascade nay ben bang con do, nhung thao tac tren ban cha se lan truyen xuong bang con => Xoa dut khoat 
     voucher           Voucher?           @relation(fields: [voucherId], references: [id], onDelete: SetNull)
     bookingItems      BookingItem[]
     payment           Payment?
