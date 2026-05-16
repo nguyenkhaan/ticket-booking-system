@@ -52,7 +52,7 @@ export class PaymentsService {
         }
 
         const paidAt = status === 'SUCCESS' ? new Date() : null;
-
+        //
         return this.prismaService.payment.update({
             where: { id: payment.id },
             data: {

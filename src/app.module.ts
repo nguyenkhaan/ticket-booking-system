@@ -16,6 +16,7 @@ import { BookingsModule } from './modules/bookings/bookings.module';
 import { TicketModule } from './modules/ticket/ticket.module';
 import { ConcertModule } from './modules/concert/concert.module';
 import { PaymentsModule } from './modules/payments/payment.module';
+import { VouchersModule } from './modules/voucher/voucher.module';
 //Add  e module here
 @Module({
     imports: [
@@ -29,7 +30,8 @@ import { PaymentsModule } from './modules/payments/payment.module';
         BookingsModule,
         TicketModule,
         ConcertModule, 
-        PaymentsModule
+        PaymentsModule, 
+        VouchersModule
     ],
     controllers: [AppController],
     providers: [
