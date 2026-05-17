@@ -61,13 +61,18 @@ bun install
 
 The repository also contains `package-lock.json`, but Bun is the intended runtime for local development.
 
-### Start Database
+### Start Database & Docker services 
 - Database running on Docker. Firstly, install Docker and running Docker service on your machine. 
 - Provide `docker-compose.yaml` to initial services: 
 
+**Method 1**: 
 ```bash
 docker compose up -d postgres redis
 ```
+
+**Method 2**: 
+
+- You can install `Docker Extension` in VsCode and Start services in `docker-compose.yaml`
 
 ### Run Migration and Seed
 
